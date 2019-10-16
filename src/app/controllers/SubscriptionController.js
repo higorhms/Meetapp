@@ -2,6 +2,8 @@ import * as Yup from 'yup';
 import { isBefore } from 'date-fns';
 import Meetup from '../models/Meetup';
 import Subscription from '../models/Subscription';
+import Mail from '../../lib/Mail';
+import User from '../models/User';
 
 class SubscriptionController {
     async store(req, res) {
@@ -17,7 +19,12 @@ class SubscriptionController {
          * Check if the meetup is this user
          */
         const { meetup_id } = req.body;
-        const meetup = await Meetup.findByPk(meetup_id);
+        const meetup = await Meetup.findByPk(meetup_id, {
+            include: [
+                { model: User, as: 'user', attributes: ['name', 'email'] },
+            ],
+        });
+
         if (meetup.user_id === req.userId) {
             return res
                 .status(401)
@@ -59,6 +66,23 @@ class SubscriptionController {
                     'You can not subscribe in two meetups with the same hour',
             });
         }
+
+        /**
+         * Sending email
+         */
+        const user = await User.findByPk(req.userId);
+
+        await Mail.sendEmail({
+            to: `${meetup.user.name} <${meetup.user.email}>`,
+            subject: 'Novo integrante Inscrito',
+            template: 'cancellation',
+            context: {
+                user: meetup.user.name,
+                meetup: meetup.title,
+                cliente: user.name,
+                email: user.email,
+            },
+        });
 
         const subscription = await Subscription.create({
             meetup_id,
