@@ -37,4 +37,15 @@ export const Container = styled.div`
         margin: 20px 0;
         border: 1px solid rgba(255, 255, 255, 0.1);
     }
+
+    > button {
+        background: #953249;
+        width: 100%
+        border: none;
+        border-radius: 4px;
+        color: #fff;
+        margin: 5px 0;
+        padding: 0 20px;
+        height: 37px;
+    }
 `;
