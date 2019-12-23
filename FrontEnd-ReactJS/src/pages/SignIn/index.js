@@ -2,18 +2,27 @@ import React from 'react';
 import { Form, Input } from '@rocketseat/unform';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
 
+import * as AuthActions from '~/store/modules/auth/actions';
 import Logo from '~/assets/logo.png';
 
 import { Container } from './styles';
+import history from '~/services/history';
 
 const schema = Yup.object().shape({
-    name: Yup.string().required,
-    email: Yup.string().email().required,
+    email: Yup.string()
+        .email()
+        .required('Insita um e-mail válido'),
+    password: Yup.string().required('Insita uma senha válida'),
 });
 
 export default function SignIn() {
-    function handleSubmit({ name, email }) {}
+    const dispatch = useDispatch();
+
+    function handleSubmit({ email, password }) {
+        dispatch(AuthActions.signInRequest(email, password));
+    }
 
     return (
         <Container>
@@ -21,7 +30,7 @@ export default function SignIn() {
 
             <Form schema={schema} onSubmit={handleSubmit}>
                 <Input name="email" type="email" placeholder="E-mail" />
-                <Input name="password" placeholder="Password" />
+                <Input name="password" type="password" placeholder="Password" />
                 <button type="submit">Acessar</button>
             </Form>
 
