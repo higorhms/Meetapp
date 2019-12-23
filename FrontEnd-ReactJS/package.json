@@ -8,6 +8,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.0",
+    "date-fns": "^2.8.1",
     "history": "^4.10.1",
     "immer": "^5.1.0",
     "polished": "^3.4.2",
@@ -31,22 +32,22 @@
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject"
-},
-"eslintConfig": {
+  },
+  "eslintConfig": {
     "extends": "react-app"
-},
-"browserslist": {
+  },
+  "browserslist": {
     "production": [
-        ">0.2%",
-        "not dead",
-        "not op_mini all"
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
     ],
     "development": [
-        "last 1 chrome version",
-        "last 1 firefox version",
-        "last 1 safari version"
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
     ]
-},
+  },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
     "babel-plugin-root-import": "^6.4.1",

@@ -4,8 +4,17 @@ export const Container = styled.div`
     max-width: 900px;
     margin: 30px auto;
 
-    > h1 {
-        text-align: center;
+    > p {
+        display: flex;
+        align-items: center;
+        height: 45px;
+        border-radius: 4px;
+        font-size: 26px;
+        font-weight: bold;
+        background: rgba(255, 255, 255, 1);
+        margin: 5px 0;
+        padding: 0 5px;
+        color: #301199;
     }
 `;
 
@@ -20,4 +29,9 @@ export const Meetup = styled.li`
     background: #eee;
     border-radius: 4px;
     padding: 15px;
+
+    > h1 {
+        color: #301199;
+        font-size: 20px;
+    }
 `;
