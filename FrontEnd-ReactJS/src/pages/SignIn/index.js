@@ -8,7 +8,6 @@ import * as AuthActions from '~/store/modules/auth/actions';
 import Logo from '~/assets/logo.png';
 
 import { Container } from './styles';
-import history from '~/services/history';
 
 const schema = Yup.object().shape({
     email: Yup.string()

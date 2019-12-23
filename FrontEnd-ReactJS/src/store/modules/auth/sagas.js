@@ -1,14 +1,19 @@
-import { put, all, takeLatest } from 'redux-saga/effects';
+import { put, all, takeLatest, call } from 'redux-saga/effects';
 
 import * as AuthActions from './actions';
 
 import history from '~/services/history';
+import api from '~/services/api';
 
 export function* signIn({ payload }) {
-    console.log('TO aqui pelo menos');
+    const { email, password } = payload;
+    console.tron.log(payload);
 
-    yield put(AuthActions.signInSucess());
+    const response = yield call(api.post, 'sessions', { email, password });
 
+    const { user, token } = response.data;
+
+    yield put(AuthActions.signInSucess(user, token));
     history.push('/dashboard');
 }
 
