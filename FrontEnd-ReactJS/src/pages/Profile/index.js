@@ -1,9 +1,17 @@
 import React from 'react';
-
+import { useDispatch } from 'react-redux';
 import { Form, Input } from '@rocketseat/unform';
+
+import * as AuthActions from '~/store/modules/auth/actions';
 import { Container } from './styles';
 
 export default function Profile() {
+    const dispatch = useDispatch();
+
+    function handleSignOut() {
+        dispatch(AuthActions.signOut());
+    }
+
     return (
         <Container>
             <Form>
@@ -30,7 +38,9 @@ export default function Profile() {
                 />
                 <button type="submit">Atualizar o usuario</button>
             </Form>
-            <button type="submit">Sair do Meetapp</button>
+            <button onClick={handleSignOut} type="submit">
+                Sair do Meetapp
+            </button>
         </Container>
     );
 }
