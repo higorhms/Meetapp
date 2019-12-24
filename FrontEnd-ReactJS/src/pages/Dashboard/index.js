@@ -56,6 +56,8 @@ export default function Dashboard() {
                 ))}
             </MeetupList>
 
+            <hr />
+
             <p>Meetups que você deseja participar</p>
             <MeetupList>
                 {meetupsSubscribeds.map(sub => (

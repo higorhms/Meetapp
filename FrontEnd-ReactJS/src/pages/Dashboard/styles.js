@@ -5,16 +5,24 @@ export const Container = styled.div`
     margin: 30px auto;
 
     > p {
-        display: flex;
-        align-items: center;
         height: 45px;
         border-radius: 4px;
-        font-size: 26px;
-        font-weight: bold;
-        background: rgba(255, 255, 255, 1);
-        margin: 5px 0;
-        padding: 0 5px;
-        color: #301199;
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        color: #fff;
+        padding: 0 20px;
+
+        display: flex;
+        align-items: center;
+
+        & + p {
+            background: red;
+        }
+    }
+
+    hr {
+        margin: 30px 0;
+        border: 1px solid rgba(255, 255, 255, 0.1);
     }
 `;
 
@@ -22,16 +30,19 @@ export const MeetupList = styled.ul`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 15px;
-    margin: 30px auto;
+
+    margin-top: 5px;
 `;
 
 export const Meetup = styled.li`
-    background: #eee;
     border-radius: 4px;
     padding: 15px;
 
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+
     > h1 {
-        color: #301199;
+        color: #fff;
         font-size: 20px;
     }
 `;
