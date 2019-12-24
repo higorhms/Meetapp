@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { parseISO, format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
+import { Link } from 'react-router-dom';
 
+import DefaultImage from '~/assets/meetup.png';
+// import DefaultImage from '~/assets/logo.png';
 import { Container, Meetup, MeetupList } from './styles';
 import api from '~/services/api';
 // import history from '~/services/history';
@@ -45,13 +48,10 @@ export default function Dashboard() {
             <p>Meetups que você organiza</p>
             <MeetupList>
                 {meetups.map(meetup => (
-                    <Meetup
-                        key={meetup.id}
-                        // onClick={() => history.push('/profile')}
-                    >
+                    <Meetup key={meetup.id}>
+                        <img src={DefaultImage} alt="banner" />
                         <h1>{meetup.title}</h1>
-                        <p>{meetup.location}</p>
-                        <time>{meetup.formattedDate}</time>
+                        <Link to="/details">Details</Link>
                     </Meetup>
                 ))}
             </MeetupList>
@@ -62,9 +62,9 @@ export default function Dashboard() {
             <MeetupList>
                 {meetupsSubscribeds.map(sub => (
                     <Meetup key={sub.meetup.id}>
+                        <img src={DefaultImage} alt="subscribedBanner" />
                         <h1>{sub.meetup.title}</h1>
-                        <p> {sub.meetup.location}</p>
-                        <time>{sub.formattedDate}</time>
+                        <Link to="/details">Details</Link>
                     </Meetup>
                 ))}
             </MeetupList>

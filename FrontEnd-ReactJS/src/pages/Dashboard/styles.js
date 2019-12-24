@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { darken, lighten } from 'polished';
 
 export const Container = styled.div`
     max-width: 900px;
@@ -42,6 +43,25 @@ export const Meetup = styled.li`
 
     background: rgba(255, 255, 255, 0.1);
     color: #fff;
+
+    img {
+        width: 100%;
+        max-height: 200px;
+        background: #301199;
+        border-radius: 4px;
+    }
+
+    > a {
+        width: 100%;
+        display: block;
+        text-align: center;
+        justify-content: center;
+        background: #301199;
+        color: #fff;
+        padding: 2px;
+        margin-top: 10px;
+        border-radius: 4px;
+    }
 
     > h1 {
         color: #fff;
