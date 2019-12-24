@@ -4,10 +4,8 @@ import pt from 'date-fns/locale/pt';
 import { Link } from 'react-router-dom';
 
 import DefaultImage from '~/assets/meetup.png';
-// import DefaultImage from '~/assets/logo.png';
 import { Container, Meetup, MeetupList } from './styles';
 import api from '~/services/api';
-// import history from '~/services/history';
 
 export default function Dashboard() {
     const [meetups, setMeetups] = useState([]);
@@ -47,13 +45,14 @@ export default function Dashboard() {
         <Container>
             <p>Meetups que você organiza</p>
             <MeetupList>
-                {meetups.map(meetup => (
-                    <Meetup key={meetup.id}>
-                        <img src={DefaultImage} alt="banner" />
-                        <h1>{meetup.title}</h1>
-                        <Link to="/details">Details</Link>
-                    </Meetup>
-                ))}
+                {meetups &&
+                    meetups.map(meetup => (
+                        <Meetup key={meetup.id}>
+                            <img src={DefaultImage} alt="banner" />
+                            <h1>{meetup.title}</h1>
+                            <Link to={`/details/${meetup.id}`}>Details</Link>
+                        </Meetup>
+                    ))}
             </MeetupList>
 
             <hr />
