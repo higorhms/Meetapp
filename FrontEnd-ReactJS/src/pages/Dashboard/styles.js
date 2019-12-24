@@ -5,6 +5,7 @@ export const Container = styled.div`
     margin: 30px auto;
 
     > p {
+        font-size: 15px;
         height: 45px;
         border-radius: 4px;
         background: rgba(255, 255, 255, 0.1);
@@ -14,6 +15,7 @@ export const Container = styled.div`
 
         display: flex;
         align-items: center;
+        justify-content: center;
 
         & + p {
             background: red;
@@ -43,6 +45,7 @@ export const Meetup = styled.li`
 
     > h1 {
         color: #fff;
-        font-size: 20px;
+        font-size: 15px;
+        font-weight: normal;
     }
 `;

@@ -50,8 +50,8 @@ export default function Dashboard() {
                         // onClick={() => history.push('/profile')}
                     >
                         <h1>{meetup.title}</h1>
-                        <p>location: {meetup.location}</p>
-                        <time>Data: {meetup.formattedDate}</time>
+                        <p>{meetup.location}</p>
+                        <time>{meetup.formattedDate}</time>
                     </Meetup>
                 ))}
             </MeetupList>
@@ -63,8 +63,8 @@ export default function Dashboard() {
                 {meetupsSubscribeds.map(sub => (
                     <Meetup key={sub.meetup.id}>
                         <h1>{sub.meetup.title}</h1>
-                        <p>location: {sub.meetup.location}</p>
-                        <time>Data: {sub.formattedDate}</time>
+                        <p> {sub.meetup.location}</p>
+                        <time>{sub.formattedDate}</time>
                     </Meetup>
                 ))}
             </MeetupList>
