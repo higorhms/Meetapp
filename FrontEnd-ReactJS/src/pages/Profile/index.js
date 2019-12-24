@@ -1,30 +1,36 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Form, Input } from '@rocketseat/unform';
 
 import * as AuthActions from '~/store/modules/auth/actions';
+import * as UserActions from '~/store/modules/user/actions';
 import { Container } from './styles';
 
 export default function Profile() {
+    const profile = useSelector(state => state.user.profile);
     const dispatch = useDispatch();
 
     function handleSignOut() {
         dispatch(AuthActions.signOut());
     }
 
+    function handleUpdateProfile(data) {
+        dispatch(UserActions.updateProfileRequest(data));
+    }
+
     return (
         <Container>
-            <Form>
+            <Form initialData={profile} onSubmit={handleUpdateProfile}>
                 <Input name="name" placeholder="Nome completo" />
                 <Input name="email" type="email" placeholder="E-mail" />
+
+                <hr />
 
                 <Input
                     name="oldPassword"
                     type="password"
                     placeholder="Old Password"
                 />
-
-                <hr />
 
                 <Input
                     name="password"
