@@ -3,10 +3,19 @@ import { parseISO, format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import { Form, Input } from '@rocketseat/unform';
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
+import * as Yup from 'yup';
 
 import * as MeetupActions from '~/store/modules/meetup/actions';
 import { Container, Meetup } from './styles';
 import api from '~/services/api';
+
+const schema = Yup.object().shape({
+    title: Yup.string().required('The title cannot be empty'),
+    description: Yup.string().required('The description cannot be empty'),
+    location: Yup.string().required('The location cannot be empty'),
+    dateFormatted: Yup.date().required('The date cannot be empty'),
+});
 
 export default function MeetupDetails({ match }) {
     const dispatch = useDispatch();
@@ -39,15 +48,27 @@ export default function MeetupDetails({ match }) {
     return (
         <Container>
             <Meetup>
-                <Form initialData={meetup} onSubmit={handleUpdateMeetup}>
+                <Form
+                    schema={schema}
+                    initialData={meetup}
+                    onSubmit={handleUpdateMeetup}
+                >
                     <Input name="title" />
                     <Input name="description" />
                     <Input name="location" />
                     <Input name="dateFormatted" />
-                    <button type="submit">Atualizar</button>
+                    <button type="submit">Update</button>
                 </Form>
-                <button type="submit">Cancelar o Meetup</button>
+                <button type="submit">Delete this Meetup</button>
             </Meetup>
         </Container>
     );
 }
+
+MeetupDetails.propTypes = {
+    match: PropTypes.shape({
+        params: PropTypes.shape({
+            id: PropTypes.number,
+        }),
+    }).isRequired,
+};

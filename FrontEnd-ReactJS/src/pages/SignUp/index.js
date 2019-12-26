@@ -2,8 +2,8 @@ import React from 'react';
 import { Form, Input } from '@rocketseat/unform';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
-
 import { useDispatch } from 'react-redux';
+
 import * as AuthActions from '~/store/modules/auth/actions';
 import Logo from '~/assets/logo.png';
 import { Container } from './styles';

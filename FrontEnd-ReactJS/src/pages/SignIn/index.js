@@ -6,14 +6,15 @@ import { useDispatch } from 'react-redux';
 
 import * as AuthActions from '~/store/modules/auth/actions';
 import Logo from '~/assets/logo.png';
-
 import { Container } from './styles';
 
 const schema = Yup.object().shape({
     email: Yup.string()
         .email()
         .required('Insita um e-mail válido'),
-    password: Yup.string().required('Insita uma senha válida'),
+    password: Yup.string()
+        .min(6)
+        .required('Insita uma senha válida'),
 });
 
 export default function SignIn() {
