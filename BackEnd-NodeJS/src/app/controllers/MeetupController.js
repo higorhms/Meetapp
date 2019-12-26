@@ -10,7 +10,14 @@ class MeetupController {
             const { meetupId } = req.params;
 
             const meetup = await Meetup.findByPk(meetupId, {
-                attributes: ['id', 'title', 'location', 'date', 'banner_id'],
+                attributes: [
+                    'id',
+                    'title',
+                    'description',
+                    'location',
+                    'date',
+                    'banner_id',
+                ],
             });
 
             res.json(meetup);
@@ -22,7 +29,14 @@ class MeetupController {
             limit: 10,
             offset: (page - 1) * 10,
             order: ['date'],
-            attributes: ['id', 'title', 'location', 'date', 'banner_id'],
+            attributes: [
+                'id',
+                'title',
+                'description',
+                'location',
+                'date',
+                'banner_id',
+            ],
         });
 
         res.json(meetups);

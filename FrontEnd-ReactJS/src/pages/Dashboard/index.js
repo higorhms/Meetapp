@@ -16,14 +16,7 @@ export default function Dashboard() {
             console.log('isso aqui ta executando quantas vezes?');
 
             const response = await api.get('/meetups');
-
-            const data = response.data.map(m => ({
-                ...m,
-                formattedDate: format(parseISO(m.date), "d 'de' MMMM", {
-                    locale: pt,
-                }),
-            }));
-            setMeetups(data);
+            setMeetups(response.data);
         }
         loadMeetups();
     }, []);
@@ -39,6 +32,7 @@ export default function Dashboard() {
                     locale: pt,
                 }),
             }));
+            console.log(subscribedMeetups);
             setMeetupsSubscribeds(subscribedMeetups);
         }
 
@@ -67,7 +61,8 @@ export default function Dashboard() {
                     <Meetup key={sub.meetup.id}>
                         <img src={DefaultImage} alt="subscribedBanner" />
                         <h1>{sub.meetup.title}</h1>
-                        <Link to="/details">Details</Link>
+                        <p>{sub.meetup.location}</p>
+                        <time>{sub.formattedDate}</time>
                     </Meetup>
                 ))}
             </MeetupList>
