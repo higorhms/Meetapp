@@ -6,12 +6,23 @@ class MeetupController {
     async index(req, res) {
         const { page = 1 } = req.query;
 
+        if (req.params.meetupId) {
+            const { meetupId } = req.params;
+
+            const meetup = await Meetup.findByPk(meetupId, {
+                attributes: ['id', 'title', 'location', 'date', 'banner_id'],
+            });
+
+            res.json(meetup);
+            return;
+        }
+
         const meetups = await Meetup.findAll({
             where: { user_id: req.userId },
             limit: 10,
             offset: (page - 1) * 10,
             order: ['date'],
-            attributes: ['id', 'title', 'location', 'date'],
+            attributes: ['id', 'title', 'location', 'date', 'banner_id'],
         });
 
         res.json(meetups);

@@ -13,6 +13,8 @@ export default function Dashboard() {
 
     useEffect(() => {
         async function loadMeetups() {
+            console.log('isso aqui ta executando quantas vezes?');
+
             const response = await api.get('/meetups');
 
             const data = response.data.map(m => ({
@@ -21,11 +23,14 @@ export default function Dashboard() {
                     locale: pt,
                 }),
             }));
-
             setMeetups(data);
         }
+        loadMeetups();
+    }, []);
 
+    useEffect(() => {
         async function loadSubscribedMeetups() {
+            console.log('isso aqui ta executando quantas vezes?');
             const respons = await api.get('/registrations');
 
             const subscribedMeetups = respons.data.map(s => ({
@@ -37,9 +42,8 @@ export default function Dashboard() {
             setMeetupsSubscribeds(subscribedMeetups);
         }
 
-        loadMeetups();
         loadSubscribedMeetups();
-    }, [meetups]);
+    }, []);
 
     return (
         <Container>
