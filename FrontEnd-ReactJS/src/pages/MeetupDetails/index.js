@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 
 import * as MeetupActions from '~/store/modules/meetup/actions';
-import { Container, Meetup } from './styles';
+import { Container } from './styles';
 import api from '~/services/api';
 
 const schema = Yup.object().shape({
@@ -47,20 +47,18 @@ export default function MeetupDetails({ match }) {
 
     return (
         <Container>
-            <Meetup>
-                <Form
-                    schema={schema}
-                    initialData={meetup}
-                    onSubmit={handleUpdateMeetup}
-                >
-                    <Input name="title" />
-                    <Input name="description" />
-                    <Input name="location" />
-                    <Input name="dateFormatted" />
-                    <button type="submit">Update</button>
-                </Form>
-                <button type="submit">Delete this Meetup</button>
-            </Meetup>
+            <Form
+                schema={schema}
+                initialData={meetup}
+                onSubmit={handleUpdateMeetup}
+            >
+                <Input name="title" />
+                <Input name="description" />
+                <Input name="location" />
+                <Input name="dateFormatted" />
+                <button type="submit">Update</button>
+            </Form>
+            <button type="submit">Delete this Meetup</button>
         </Container>
     );
 }
@@ -68,7 +66,7 @@ export default function MeetupDetails({ match }) {
 MeetupDetails.propTypes = {
     match: PropTypes.shape({
         params: PropTypes.shape({
-            id: PropTypes.number,
+            id: PropTypes.string,
         }),
     }).isRequired,
 };
