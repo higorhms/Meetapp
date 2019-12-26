@@ -28,11 +28,14 @@ export default function Dashboard() {
 
             const subscribedMeetups = respons.data.map(s => ({
                 ...s,
-                formattedDate: format(parseISO(s.meetup.date), "d 'de' MMMM", {
-                    locale: pt,
-                }),
+                formattedDate: format(
+                    parseISO(s.meetup.date),
+                    "d 'de' MMMM 'de' yyyy",
+                    {
+                        locale: pt,
+                    }
+                ),
             }));
-            console.log(subscribedMeetups);
             setMeetupsSubscribeds(subscribedMeetups);
         }
 
