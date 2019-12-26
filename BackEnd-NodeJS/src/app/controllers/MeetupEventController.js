@@ -1,4 +1,4 @@
-import { startOfDay, endOfDay } from 'date-fns';
+// import { startOfDay, endOfDay, isPast } from 'date-fns';
 import { Op } from 'sequelize';
 import Meetup from '../models/Meetup';
 import User from '../models/User';
@@ -6,16 +6,23 @@ import User from '../models/User';
 class MeetupEventController {
     async index(req, res) {
         const { date, page = 1 } = req.query;
+        const { userId } = req;
 
         const formattedDate = new Date(date);
 
         const meetups = await Meetup.findAll({
             where: {
+                user_id: {
+                    [Op.not]: userId,
+                },
+                // date: {
+                //     [Op.between]: [
+                //         startOfDay(formattedDate),
+                //         endOfDay(formattedDate),
+                //     ],
+                // },
                 date: {
-                    [Op.between]: [
-                        startOfDay(formattedDate),
-                        endOfDay(formattedDate),
-                    ],
+                    [Op.gt]: formattedDate,
                 },
             },
             limit: 10,
