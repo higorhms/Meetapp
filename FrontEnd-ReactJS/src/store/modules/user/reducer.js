@@ -22,6 +22,12 @@ export default function user(state = INITIAL_STATE, action) {
                 draft.subMeetups = action.payload.subscribedMeetups;
                 break;
             }
+            case '@meetup/UNSUBSCRIBE_MEETUP_SUCESS': {
+                draft.subMeetups = draft.subMeetups.filter(
+                    m => m.meetup.id !== action.payload.meetupId
+                );
+                break;
+            }
             default: {
                 break;
             }

@@ -19,6 +19,20 @@ export function subscribeMeetupRequest(meetupId) {
     };
 }
 
+export function unsubscribeMeetupRequest(meetupId) {
+    return {
+        type: '@meetup/UNSUBSCRIBE_MEETUP_REQUEST',
+        payload: { meetupId },
+    };
+}
+
+export function unsubscribeMeetupSucess(meetupId) {
+    return {
+        type: '@meetup/UNSUBSCRIBE_MEETUP_SUCESS',
+        payload: { meetupId },
+    };
+}
+
 export function loadSubscribedMeetupsRequest() {
     return {
         type: '@meetup/LOAD_SUBSCRIBED_MEETUPS_REQUEST',

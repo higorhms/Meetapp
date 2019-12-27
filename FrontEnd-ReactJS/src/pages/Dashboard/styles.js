@@ -67,4 +67,15 @@ export const Meetup = styled.li`
         font-size: 15px;
         font-weight: normal;
     }
+
+    > button {
+        background: #953249;
+        width: 100%;
+        border: none;
+        border-radius: 4px;
+        color: #fff;
+        margin: 5px 0;
+        padding: 0 20px;
+        height: 37px;
+    }
 `;

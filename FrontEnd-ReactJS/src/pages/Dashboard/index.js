@@ -27,6 +27,10 @@ export default function Dashboard() {
         loadSubscribedMeetups();
     }, [dispatch]);
 
+    function makeUnsubscription(meetupId) {
+        dispatch(MeetupActions.unsubscribeMeetupRequest(meetupId));
+    }
+
     return (
         <Container>
             <p>Meetups que você organiza</p>
@@ -51,6 +55,12 @@ export default function Dashboard() {
                         <h1>{sub.meetup.title}</h1>
                         <p>{sub.meetup.location}</p>
                         <time>{sub.formattedDate}</time>
+                        <button
+                            type="button"
+                            onClick={() => makeUnsubscription(sub.meetup.id)}
+                        >
+                            Unsubscribe
+                        </button>
                     </Meetup>
                 ))}
             </MeetupList>

@@ -79,6 +79,19 @@ export function* loadSubscribedMeetups() {
     }
 }
 
+export function* unsubscribeMeetup({ payload }) {
+    try {
+        const { meetupId } = payload;
+
+        yield call(api.delete, `/subscriptions/${meetupId}`);
+
+        toast.success('Unsubscribed with sucess');
+        yield put(MeetupActions.unsubscribeMeetupSucess(meetupId));
+    } catch (err) {
+        toast.error('Someting is wrong, please try again');
+    }
+}
+
 export default all([
     takeLatest('@meetup/UPDATE_MEETUP_REQUEST', updateMeetup),
     takeLatest('@meetup/CREATE_MEETUP_REQUEST', createMeetup),
@@ -87,4 +100,5 @@ export default all([
         '@meetup/LOAD_SUBSCRIBED_MEETUPS_REQUEST',
         loadSubscribedMeetups
     ),
+    takeLatest('@meetup/UNSUBSCRIBE_MEETUP_REQUEST', unsubscribeMeetup),
 ]);
