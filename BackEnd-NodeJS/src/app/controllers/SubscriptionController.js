@@ -98,7 +98,7 @@ class SubscriptionController {
         const { meetupId } = req.params;
 
         const subscription = await Subscription.findOne({
-            where: { id: meetupId, user_id: userId },
+            where: { meetup_id: meetupId, user_id: userId },
         });
 
         if (!subscription) {
