@@ -11,3 +11,23 @@ export function updateMeetupRequest(id, data) {
         payload: { id, data },
     };
 }
+
+export function subscribeMeetupRequest(meetupId) {
+    return {
+        type: '@meetup/SUBSCRIBE_MEETUP_REQUEST',
+        payload: { meetupId },
+    };
+}
+
+export function loadSubscribedMeetupsRequest() {
+    return {
+        type: '@meetup/LOAD_SUBSCRIBED_MEETUPS_REQUEST',
+    };
+}
+
+export function loadSubscribedMeetupsSucess(subscribedMeetups) {
+    return {
+        type: '@meetup/LOAD_SUBSCRIBED_MEETUPS_SUCESS',
+        payload: { subscribedMeetups },
+    };
+}

@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { parseISO, format } from 'date-fns';
-import pt from 'date-fns/locale/pt';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
+import * as MeetupActions from '~/store/modules/meetup/actions';
 import DefaultImage from '~/assets/meetup.png';
 import { Container, Meetup, MeetupList } from './styles';
 import api from '~/services/api';
 
 export default function Dashboard() {
+    const dispatch = useDispatch();
     const [meetups, setMeetups] = useState([]);
-    const [meetupsSubscribeds, setMeetupsSubscribeds] = useState([]);
+    const meetupsSubscribeds = useSelector(state => state.user.subMeetups);
 
     useEffect(() => {
         async function loadMeetups() {
-            console.log('isso aqui ta executando quantas vezes?');
-
             const response = await api.get('/meetups');
             setMeetups(response.data);
         }
@@ -23,24 +22,10 @@ export default function Dashboard() {
 
     useEffect(() => {
         async function loadSubscribedMeetups() {
-            console.log('isso aqui ta executando quantas vezes?');
-            const respons = await api.get('/registrations');
-
-            const subscribedMeetups = respons.data.map(s => ({
-                ...s,
-                formattedDate: format(
-                    parseISO(s.meetup.date),
-                    "d 'de' MMMM 'de' yyyy",
-                    {
-                        locale: pt,
-                    }
-                ),
-            }));
-            setMeetupsSubscribeds(subscribedMeetups);
+            await dispatch(MeetupActions.loadSubscribedMeetupsRequest());
         }
-
         loadSubscribedMeetups();
-    }, []);
+    }, [dispatch]);
 
     return (
         <Container>
