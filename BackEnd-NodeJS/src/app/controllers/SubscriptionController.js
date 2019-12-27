@@ -92,6 +92,25 @@ class SubscriptionController {
 
         return res.json(subscription);
     }
+
+    async delete(req, res) {
+        const { userId } = req;
+        const { meetupId } = req.params;
+
+        const subscription = await Subscription.findOne({
+            where: { id: meetupId, user_id: userId },
+        });
+
+        if (!subscription) {
+            return res
+                .status(401)
+                .json({ error: 'You can only delete your subscriptions' });
+        }
+
+        await subscription.destroy();
+
+        return res.json({ message: 'Deleted sucessfull' });
+    }
 }
 
 export default new SubscriptionController();
