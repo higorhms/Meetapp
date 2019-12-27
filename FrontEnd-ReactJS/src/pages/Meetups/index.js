@@ -31,17 +31,19 @@ export default function Meetups() {
                 ),
             }));
 
-            /** --------------------------------------------------------
-             * COMPARAR OS DOIS ARRAYS E DEVOLVER SÓMENTE OS OBJETOS EM QUE O ID NÃO CONTEM NO OUTRO ARRAY
-             */
-            // const aux = data.map(me => {
-            //     if (String(me.id) === String(subMeetups[0].meetup.id)) {
-            //         return { ...me };
-            //     }
-            // });
-            // ---------------------------------------------------------
+            // Filtrando o array de meetups para mostrar apenas os meetups que o usuario ainda não se inscreveu
+            let aux = [];
+            data.forEach(m => {
+                let deveAdd = true;
+                subMeetups.forEach(s => {
+                    if (m.id === s.meetup.id) {
+                        deveAdd = false;
+                    }
+                });
+                if (deveAdd) aux = [...aux, m];
+            });
 
-            setMeetups(data);
+            setMeetups(aux);
         }
         loadMeetups();
     }, [subMeetups]);
