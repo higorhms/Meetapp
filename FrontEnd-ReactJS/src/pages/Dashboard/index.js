@@ -49,20 +49,23 @@ export default function Dashboard() {
 
             <p>Meetups que você deseja participar</p>
             <MeetupList>
-                {meetupsSubscribeds.map(sub => (
-                    <Meetup key={sub.meetup.id}>
-                        <img src={DefaultImage} alt="subscribedBanner" />
-                        <h1>{sub.meetup.title}</h1>
-                        <p>{sub.meetup.location}</p>
-                        <time>{sub.formattedDate}</time>
-                        <button
-                            type="button"
-                            onClick={() => makeUnsubscription(sub.meetup.id)}
-                        >
-                            Unsubscribe
-                        </button>
-                    </Meetup>
-                ))}
+                {meetupsSubscribeds &&
+                    meetupsSubscribeds.map(sub => (
+                        <Meetup key={sub.meetup.id}>
+                            <img src={DefaultImage} alt="subscribedBanner" />
+                            <h1>{sub.meetup.title}</h1>
+                            <p>{sub.meetup.location}</p>
+                            <time>{sub.formattedDate}</time>
+                            <button
+                                type="button"
+                                onClick={() =>
+                                    makeUnsubscription(sub.meetup.id)
+                                }
+                            >
+                                Unsubscribe
+                            </button>
+                        </Meetup>
+                    ))}
             </MeetupList>
         </Container>
     );
