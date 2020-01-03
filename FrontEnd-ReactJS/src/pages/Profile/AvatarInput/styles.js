@@ -18,4 +18,5 @@ export const Container = styled.div`
         input {
             display: none;
         }
+    }
 `;
