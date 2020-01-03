@@ -4,18 +4,19 @@ import pt from 'date-fns/locale/pt';
 import { Form, Input } from '@rocketseat/unform';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import * as Yup from 'yup';
+// import * as Yup from 'yup';
 
 import * as MeetupActions from '~/store/modules/meetup/actions';
 import { Container } from './styles';
 import api from '~/services/api';
+import MeetupInput from './MeetupInput';
 
-const schema = Yup.object().shape({
-    title: Yup.string().required('The title cannot be empty'),
-    description: Yup.string().required('The description cannot be empty'),
-    location: Yup.string().required('The location cannot be empty'),
-    dateFormatted: Yup.date().required('The date cannot be empty'),
-});
+// const schema = Yup.object().shape({
+//     title: Yup.string().required('The title cannot be empty'),
+//     description: Yup.string().required('The description cannot be empty'),
+//     location: Yup.string().required('The location cannot be empty'),
+//     dateFormatted: Yup.date().required('The date cannot be empty'),
+// });
 
 export default function MeetupDetails({ match }) {
     const dispatch = useDispatch();
@@ -48,10 +49,11 @@ export default function MeetupDetails({ match }) {
     return (
         <Container>
             <Form
-                schema={schema}
+                // schema={schema}
                 initialData={meetup}
                 onSubmit={handleUpdateMeetup}
             >
+                <MeetupInput name="banner_id" />
                 <Input name="title" />
                 <Input name="description" />
                 <Input name="location" />
