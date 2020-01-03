@@ -20,6 +20,13 @@ class User extends Model {
         return this;
     }
 
+    /**
+     * Method associate all the models in src/database/INDEX.Js with others models in database
+     */
+    static associate(models) {
+        this.belongsTo(models.File, { foreignKey: 'avatar_id', as: 'avatar' });
+    }
+
     checkPassword(password) {
         return bcrypt.compare(password, this.password_hash);
     }
