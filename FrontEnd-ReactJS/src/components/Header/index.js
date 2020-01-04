@@ -8,7 +8,7 @@ import Logo from '~/assets/logo.png';
 export default function Header() {
     const userName = useSelector(state => state.user.profile.name);
     const avatar = useSelector(
-        state => state.user.profile.avatar.url && state.user.profile.avatar.url
+        state => state.user.profile.avatar && state.user.profile.avatar.url
     );
 
     return (
