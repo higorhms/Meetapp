@@ -1,5 +1,6 @@
 import Subscription from '../models/Subscription';
 import Meetup from '../models/Meetup';
+import File from '../models/File';
 
 class RegistrationsController {
     async index(req, res) {
@@ -17,6 +18,12 @@ class RegistrationsController {
                         'description',
                         'location',
                         'date',
+                    ],
+                    include: [
+                        {
+                            model: File,
+                            as: 'banner',
+                        },
                     ],
                 },
             ],
