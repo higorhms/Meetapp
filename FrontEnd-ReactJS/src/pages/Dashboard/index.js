@@ -38,7 +38,13 @@ export default function Dashboard() {
                 {meetups &&
                     meetups.map(meetup => (
                         <Meetup key={meetup.id}>
-                            <img src={DefaultImage} alt="banner" />
+                            <img
+                                src={
+                                    (meetup.banner && meetup.banner.url) ||
+                                    DefaultImage
+                                }
+                                alt="banner"
+                            />
                             <h1>{meetup.title}</h1>
                             <Link to={`/details/${meetup.id}`}>Details</Link>
                         </Meetup>
