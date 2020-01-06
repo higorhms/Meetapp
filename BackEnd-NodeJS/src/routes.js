@@ -21,6 +21,7 @@ routes.use(authMiddleware);
 
 // Route for upload of files
 routes.post('/files', upload.single('file'), FileController.store);
+routes.get('/files/:banner_id', FileController.index);
 
 routes.put('/users', UserController.update);
 
