@@ -58,7 +58,14 @@ export default function Dashboard() {
                 {meetupsSubscribeds &&
                     meetupsSubscribeds.map(sub => (
                         <Meetup key={sub.meetup.id}>
-                            <img src={DefaultImage} alt="subscribedBanner" />
+                            <img
+                                src={
+                                    (sub.meetup.banner &&
+                                        sub.meetup.banner.url) ||
+                                    DefaultImage
+                                }
+                                alt="subscribedBanner"
+                            />
                             <h1>{sub.meetup.title}</h1>
                             <p>{sub.meetup.location}</p>
                             <time>{sub.formattedDate}</time>
