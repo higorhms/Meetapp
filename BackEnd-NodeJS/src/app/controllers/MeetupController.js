@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 import { isBefore, parseISO } from 'date-fns';
 import Meetup from '../models/Meetup';
+import File from '../models/File';
 
 class MeetupController {
     async index(req, res) {
@@ -37,6 +38,7 @@ class MeetupController {
                 'date',
                 'banner_id',
             ],
+            include: { model: File, as: 'banner' },
         });
 
         res.json(meetups);

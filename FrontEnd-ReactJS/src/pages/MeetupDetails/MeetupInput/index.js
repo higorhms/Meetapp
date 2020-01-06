@@ -1,11 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import { useSelector } from 'react-redux';
 import DefaultImage from '~/assets/meetup.png';
 import { Container } from './styles';
+import api from '~/services/api';
 
-export default function MeetupInput({ banner_id }) {
-    const [file, setFile] = useState('');
+export default function MeetupInput({ bannerId }) {
+    const [file, setFile] = useState({});
+
+    useEffect(() => {
+        async function loadPreview() {
+            console.log('executado x vezes');
+            const response = await api.get(`/files/${bannerId}`);
+
+            setFile(response.data.url);
+        }
+        loadPreview();
+    }, [bannerId]);
 
     return (
         <Container>

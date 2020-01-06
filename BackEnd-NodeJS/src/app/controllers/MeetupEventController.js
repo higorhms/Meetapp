@@ -2,6 +2,7 @@
 import { Op } from 'sequelize';
 import Meetup from '../models/Meetup';
 import User from '../models/User';
+import File from '../models/File';
 
 class MeetupEventController {
     async index(req, res) {

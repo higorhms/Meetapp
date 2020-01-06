@@ -37,6 +37,7 @@ export default function MeetupDetails({ match }) {
                 ),
             });
             console.log(data);
+
             setMeetup(data);
         }
         loadMeetup();
@@ -53,7 +54,7 @@ export default function MeetupDetails({ match }) {
                 initialData={meetup}
                 onSubmit={handleUpdateMeetup}
             >
-                <MeetupInput name="banner_id" meetup={meetup} />
+                <MeetupInput name="banner_id" bannerId={meetup.banner_id} />
                 <Input name="title" />
                 <Input name="description" />
                 <Input name="location" />
