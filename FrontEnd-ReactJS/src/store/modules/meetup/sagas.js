@@ -28,12 +28,19 @@ export function* createMeetup({ payload }) {
 export function* updateMeetup({ payload }) {
     try {
         const { id } = payload;
-        const { title, description, location, formattedDate } = payload.data;
-
-        yield call(api.put, `/meetups/${id}`, {
+        const {
             title,
             description,
             location,
+            formattedDate,
+            banner_id,
+        } = payload.data;
+
+        const response = yield call(api.put, `/meetups/${id}`, {
+            title,
+            description,
+            location,
+            banner_id,
             date: formattedDate,
         });
 
@@ -92,6 +99,24 @@ export function* unsubscribeMeetup({ payload }) {
     }
 }
 
+export function* loadMeetup({ payload }) {
+    try {
+        const { meetupId } = payload;
+
+        const response = yield call(api.get, `/meetups/${meetupId}`);
+
+        const data = Object.assign(response.data, {
+            dateFormatted: format(parseISO(response.data.date), 'yyyy-MM-dd', {
+                locale: pt,
+            }),
+        });
+
+        yield put(MeetupActions.loadMeetupSucess(data));
+    } catch (error) {
+        toast.error('');
+    }
+}
+
 export default all([
     takeLatest('@meetup/UPDATE_MEETUP_REQUEST', updateMeetup),
     takeLatest('@meetup/CREATE_MEETUP_REQUEST', createMeetup),
@@ -101,4 +126,5 @@ export default all([
         loadSubscribedMeetups
     ),
     takeLatest('@meetup/UNSUBSCRIBE_MEETUP_REQUEST', unsubscribeMeetup),
+    takeLatest('@meetup/LOAD_MEETUP_REQUEST', loadMeetup),
 ]);

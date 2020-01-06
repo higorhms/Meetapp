@@ -58,7 +58,13 @@ export default function Meetups() {
             <MeetupList>
                 {meetups.map(meetup => (
                     <Meetup key={meetup.id}>
-                        <img src={DefaultImage} alt="banner" />
+                        <img
+                            src={
+                                (meetup.banner && meetup.banner.url) ||
+                                DefaultImage
+                            }
+                            alt="banner"
+                        />
                         <h1>{meetup.title}</h1>
                         <p>{meetup.location}</p>
                         <time>{meetup.formattedDate}</time>

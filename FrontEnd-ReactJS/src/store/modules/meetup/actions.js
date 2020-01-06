@@ -45,3 +45,17 @@ export function loadSubscribedMeetupsSucess(subscribedMeetups) {
         payload: { subscribedMeetups },
     };
 }
+
+export function loadMeetupRequest(meetupId) {
+    return {
+        type: '@meetup/LOAD_MEETUP_REQUEST',
+        payload: { meetupId },
+    };
+}
+
+export function loadMeetupSucess(event) {
+    return {
+        type: '@meetup/LOAD_MEETUP_SUCESS',
+        payload: { event },
+    };
+}

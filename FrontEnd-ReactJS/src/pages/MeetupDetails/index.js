@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { parseISO, format } from 'date-fns';
-import pt from 'date-fns/locale/pt';
+import React, { useEffect } from 'react';
 import { Form, Input } from '@rocketseat/unform';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 // import * as Yup from 'yup';
 
 import * as MeetupActions from '~/store/modules/meetup/actions';
 import { Container } from './styles';
-import api from '~/services/api';
 import MeetupInput from './MeetupInput';
 
 // const schema = Yup.object().shape({
@@ -21,27 +18,11 @@ import MeetupInput from './MeetupInput';
 export default function MeetupDetails({ match }) {
     const dispatch = useDispatch();
     const meetupId = match.params.id;
-    const [meetup, setMeetup] = useState({});
+    const meetup = useSelector(state => state.meetup.event);
 
     useEffect(() => {
-        async function loadMeetup() {
-            const response = await api.get(`/meetups/${meetupId}`);
-
-            const data = Object.assign(response.data, {
-                dateFormatted: format(
-                    parseISO(response.data.date),
-                    'yyyy-MM-dd',
-                    {
-                        locale: pt,
-                    }
-                ),
-            });
-            console.log(data);
-
-            setMeetup(data);
-        }
-        loadMeetup();
-    }, [meetupId]);
+        dispatch(MeetupActions.loadMeetupRequest(meetupId));
+    }, [dispatch, meetupId]);
 
     function handleUpdateMeetup(data) {
         dispatch(MeetupActions.updateMeetupRequest(meetup.id, data));

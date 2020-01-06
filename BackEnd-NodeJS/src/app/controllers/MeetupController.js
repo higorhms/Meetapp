@@ -19,6 +19,7 @@ class MeetupController {
                     'date',
                     'banner_id',
                 ],
+                include: { model: File, as: 'banner' },
             });
 
             res.json(meetup);
