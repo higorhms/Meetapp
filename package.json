@@ -10,7 +10,7 @@
     "axios": "*",
     "date-fns": "*",
     "history": "*",
-    "immer": "^6.0.3",
+    "immer": "^8.0.1",
     "polished": "*",
     "prop-types": "*",
     "react": "*",
